@@ -32,7 +32,7 @@ jobs:
         run: dotnet restore; dotnet publish -r linux-x64 --configuration "Release" --self-contained "true" -o ../site;
 
       - name: Generate deployment package 
-        run: cd ../site; zip ../site.zip *; cd ..; zip [yourApp].zip site.zip aws-windows-deployment-manifest.json
+        run: cd ../site; zip ../site.zip *; cd ..; zip NetWebApi.zip site.zip aws-windows-deployment-manifest.json
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v16
@@ -43,4 +43,4 @@ jobs:
           environment_name: Net-web-api-env
           version_label: ${{ github.run_id }}
           region: us-east-1
-          deployment_package: site.zip
+          deployment_package: NetWebApi.zip
