@@ -21,15 +21,15 @@ jobs:
      # Steps represent a sequence of tasks that will be executed as part of the job
     steps:     
       - name: Git setup
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Dotnet run
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x' # SDK Version to use; x will use the latest version of the 3.1 channel
       
       - name: Publish prod
-        run: cd /NetWebApi; dotnet restore; dotnet publish -r linux-x64 --configuration "Release" --self-contained "true" -o ../site;
+        run: dotnet restore; dotnet publish -r linux-x64 --configuration "Release" --self-contained "true" -o ../site;
 
       - name: Generate deployment package 
         run: cd site; zip ../site.zip *; cd ..; zip [yourApp].zip site.zip aws-windows-deployment-manifest.json
