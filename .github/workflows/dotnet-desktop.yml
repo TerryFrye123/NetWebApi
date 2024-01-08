@@ -26,10 +26,10 @@ jobs:
       - name: Dotnet run
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0' # SDK Version to use; x will use the latest version of the 3.1 channel
+          dotnet-version: '6.0.x' # SDK Version to use; x will use the latest version of the 3.1 channel
       
       - name: Publish prod
-        run: cd NetWebApi; dotnet restore; dotnet publish -r linux-x64 --configuration "Release" --self-contained "true" -o ../site;
+        run: cd /NetWebApi; dotnet restore; dotnet publish -r linux-x64 --configuration "Release" --self-contained "true" -o ../site;
 
       - name: Generate deployment package 
         run: cd site; zip ../site.zip *; cd ..; zip [yourApp].zip site.zip aws-windows-deployment-manifest.json
