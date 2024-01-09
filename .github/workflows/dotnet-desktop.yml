@@ -29,10 +29,10 @@ jobs:
           dotnet-version: 6.0.201
       
       - name: Publish prod
-        run: dotnet restore; dotnet publish -r linux-x64 --configuration "Release" --self-contained "true";
+        run: dotnet restore; dotnet publish -r linux-x64 --configuration "Release" --self-contained "true" -o ../site;
 
       - name: Generate deployment package 
-        run: zip NetWebApi.zip *
+        run: zip NetWebApi.zip ../site/*
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v16
